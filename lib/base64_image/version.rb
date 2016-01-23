@@ -1,0 +1,3 @@
+module Base64Image
+  VERSION = "0.1.0"
+end

@@ -1,4 +1,5 @@
 require "base64_image/version"
+require "base64_image/string_io"
 require "base64"
 
 module Base64Image
@@ -23,16 +24,7 @@ module Base64Image
         # $3 - encoded binary data
         binary_data = Base64.decode64($3)
         extension = $1.split('/')[1]
-        io = StringIO.new(binary_data)
-
-        # For carrierwave's attachments.
-        io.class.class_eval do
-          def original_filename
-            "temp." << extension
-          end
-        end
-
-        io
+        Base64Image::StringIO.new(binary_data)
       end
     end
   end
